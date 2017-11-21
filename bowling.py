@@ -17,7 +17,7 @@ def get_value(char):
 def score(game):
     result = 0
     frame = 1
-    in_first_half = True
+    in_first_roll = True
     for i in range(len(game)):
         if game[i] == '/':
             result += 10 - last_score
@@ -33,13 +33,13 @@ def score(game):
                 else:
                     result += get_value(game[i+2])
         last_score = get_value(game[i])
-        if in_first_half == False:
-            in_first_half = True
+        if in_first_roll == False:
+            in_first_roll = True
             frame += 1
         else:
-            in_first_half = False
+            in_first_roll = False
         if game[i] == 'X' or game[i] == 'x':
-            in_first_half = True
+            in_first_roll = True
             frame += 1
     return result
 
