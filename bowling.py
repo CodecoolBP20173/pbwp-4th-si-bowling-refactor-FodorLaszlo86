@@ -33,12 +33,11 @@ def score(game):
                 else:
                     result += get_value(game[i+2])
         last = get_value(game[i])
-        if not in_first_half:
-            frame += 1
-        if in_first_half == True:
-            in_first_half = False
-        else:
+        if in_first_half == False:
             in_first_half = True
+            frame += 1
+        else:
+            in_first_half = False
         if game[i] == 'X' or game[i] == 'x':
             in_first_half = True
             frame += 1
