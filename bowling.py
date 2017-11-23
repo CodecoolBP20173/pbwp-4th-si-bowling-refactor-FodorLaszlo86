@@ -1,3 +1,6 @@
+MAX_VALUE = 10
+MAX_FRAME = 10
+
 
 def get_value(char):
     if char != '0' and char.isdigit():
@@ -16,20 +19,18 @@ def score(game):
     result = 0
     frame = 1
     in_first_roll = True
-    max_value = 10
-    max_frame = 10
     for i in range(len(game)):
-        if game[i] == '/':
-            result += max_value - last_score
+        if is_spare(game[i]):
+            result += MAX_VALUE - last_score
         else:
             result += get_value(game[i])
-        if frame < max_frame and get_value(game[i]) == max_value:
-            if game[i] == '/':
+        if frame < MAX_FRAME and get_value(game[i]) == MAX_VALUE:
+            if is_spare(game[i]):
                 result += get_value(game[i+1])
-            elif game[i] == 'X' or game[i] == 'x':
+            elif is_strike(game[i]):
                 result += get_value(game[i+1])
-                if game[i+2] == '/':
-                    result += max_value - get_value(game[i+1])
+                if is_spare(game[i+2]):
+                    result += MAX_VALUE - get_value(game[i+1])
                 else:
                     result += get_value(game[i+2])
         last_score = get_value(game[i])
@@ -38,8 +39,17 @@ def score(game):
             frame += 1
         else:
             in_first_roll = False
-        if game[i] == 'X' or game[i] == 'x':
+        if is_strike(game[i]):
             in_first_roll = True
             frame += 1
     return result
 
+
+def is_strike(frame_result):
+    if 'X' == frame_result or 'x' == frame_result:
+        return True
+
+
+def is_spare(frame_result):
+    if '/' == frame_result:
+        return True
