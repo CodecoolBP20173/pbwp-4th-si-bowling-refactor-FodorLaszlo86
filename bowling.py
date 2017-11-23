@@ -33,7 +33,7 @@ def score(game):
                 else:
                     result += get_value(game[i+2])
         last_score = get_value(game[i])
-        if in_first_roll == False:
+        if not in_first_roll:
             in_first_roll = True
             frame += 1
         else:
