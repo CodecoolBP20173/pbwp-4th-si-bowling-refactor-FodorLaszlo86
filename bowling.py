@@ -3,17 +3,16 @@ MAX_FRAME = 10
 
 
 def get_value(char):
-    if char != '0' and char.isdigit():
-        return int(char)
-    elif char == 'X' or char == 'x':
-        return 10
-    elif char == '/':
-        return 10
-    elif char == '-':
-        return 0
-    else:
-        raise ValueError()
-
+    try:
+        if char != '0' and char.isdigit():
+            return int(char)
+        elif char == 'X' or char == 'x' or char == '/':
+            return 10
+        elif char == '-':
+            return 0
+    except ValueError:
+        return "Not valid Value!"
+    
 
 def score(game):
     result = 0
